@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rainy Days Product</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+    <header>
+        <h1>Rainy Days</h1>
+        <a href="/index.html">LOGO</a>
+        <nav>
+            <label>
+                <input id="filter-search" type="search" placeholder="Search products…" />
+                </label>
+            <a href="/checkout/index.html" aria-label="Go to checkout">Cart (<span id="cart-count">0</span>)</a>
+        </nav>
+    </header>
+    <main class="container">
+        <section>
+            <article id="product" aria-live="polite" aria-busy="false"></article>
+            <div id="error" class="error" hidden></div>
+            <h2>Title of product!</h2>
+            <h3>Product description</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            <label> Choose size
+                    <select id="filter-category">
+                        <option value="">All</option>
+                    </select>
+            <button>Add to cart</button>
+        </section>
+    </main>
+    <script type="module" src="/js/pages/product.js"></script>
+</body>
+</html>
