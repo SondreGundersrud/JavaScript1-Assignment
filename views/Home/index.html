@@ -3,42 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rainy Days Store</title>
-    <link rel="stylesheet" href="./css/styles.css"/>
+        <title>Rainy Days Store</title>
+    <link rel="stylesheet" href="/css/styles.css"/>
 </head>
 <body>
-    <header>
-        <h1>Rainy Days</h1>
-        <a href="/index.html">LOGO</a>
-        <nav>
-            <label>
-                    <input id="filter-search" type="search" placeholder="Search products…" />
-                </label>
-            <a href="/checkout/index.html" aria-label="Go to checkout">Cart (<span id="cart-count">0</span>)</a>
-        </nav>
-    </header>
-    <main class="container">
-        <section aria-labelledby="filters-title" class="filters">
-            <h2 id="filters-title">Filters</h2>
-            <div class="filters-row">
-                <label> Category
-                    <select id="filter-category">
-                        <option value="">All</option>
-                    </select>
-                </label>
-                <label>Gender
-                    <select id="filter-gender">
-                        <option value="">All</option>
-                    </select>
-                </label>
-            </div>
-        </section>
-        <section aria-live="polite" aria-busy="false">
-            <div id="loader" class="loader hidden" role="status" aria-label="Loading items"></div>
-            <ul id="product-list" class="grid"></ul>
-            <div id="error" class="error" hidden></div>
-        </section>
-    </main>
-    <script type="module" src="./js/pages/home.js"></script>
+  <header>
+    <label for="gender">Gender:</label>
+    <select id="gender">
+      <option value="all">All</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+    <label for="category">Category:</label>
+    <select id="category">
+      <option value="all">All</option>
+      <option value="outdoors">Outdoors</option>
+      <option value="training">Training</option>
+    </select>
+  </header>
+  <main>
+    <div id="container" class="container"></div>
+  </main>
+<script src="/js/pages/home.js"></script>
 </body>
 </html>
