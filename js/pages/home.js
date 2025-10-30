@@ -48,5 +48,5 @@ async function fetchAPIProducts() {
         container.textContent = "Could not load products at this time.";
         console.error("Error while fetching products:", error.message);
     }
-
-fetchAPIProducts();}
+}
+fetchAPIProducts()
