@@ -3,12 +3,13 @@ const container = document.querySelector("#container")
 const API_URL = "https://v2.api.noroff.dev/rainy-days"
 
 async function fetchAPIProducts() {
-    let products = [];
+    // let products = [];
     try {
-        const response = await fetch(API_URL, { method: "GET" });
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status} ${response.statusText}`);
-        }
+        const response = await fetch(API_URL);
+        // const response = await fetch(API_URL, { method: "GET" });
+        // if (!response.ok) {
+        //     throw new Error(`HTTP ${response.status} ${response.statusText}`);
+        // }
 
         const data = await response.json();
         products = Array.isArray(data?.data) ? data.data : data;
@@ -29,12 +30,13 @@ async function fetchAPIProducts() {
             title.className = 'box-title';
             price.className = 'box-price';
             
-
             image.src = product.image.url;
             image.alt = product.image.alt;
             title.textContent = product.title;
-            price.textContent = `USD ${product.price.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
-            link.href = `product.html?id=${product.id}`;
+            price.textContent = `$ ${product.price.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+            link.href = `../product/index.html?id=${product.id}`;
+            // link.href = `../../product/index.html?id=${product.id}`;
+            // link.href = `/product/index.html?id=${product.id}`;
 
             content.appendChild(title);
             content.appendChild(price);

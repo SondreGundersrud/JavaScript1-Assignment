@@ -12,17 +12,15 @@ async function fetchAPIProducts() {
             return;
         }
         const response = await fetch(`${API_URL}/${id}`)
-        if (!response.ok) {
-            if (response.status === 404) {
-                container.textContent = "Sorry, product not found.";
-                return;
-            }
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
+        // if (!response.ok) {
+        //     if (response.status === 404) {
+        //         container.textContent = "Sorry, product not found.";
+        //         return;}
+        //     throw new Error(`HTTP error! Status: ${response.status}`);
+        // }
         const data = await response.json()
         const product = data.data
 
-        product.array.forEach(element => {
         const productDiv = document.createElement("div")
         const image = document.createElement("img")
         const title = document.createElement("h2")
@@ -30,14 +28,13 @@ async function fetchAPIProducts() {
         const price = document.createElement("p")
         const backLink = document.createElement("a")
 
-        productDiv.className = 'product-detail';
+        productDiv.className = 'product-details';
         image.className = 'product-image';
         title.className = 'product-title';
         description.className = 'product-description';
         price.className = 'product-price';
         const buyButton = document.createElement("button");
         backLink.className = 'back-link';
-        anchor.href = "index.html";
         backLink.textContent = "← Back to products";
         
         image.src = product.image.url;
@@ -45,10 +42,10 @@ async function fetchAPIProducts() {
         title.textContent = product.title;
         description.textContent = product.description;
         price.textContent = product.price;
-        // price.textContent = `NOK ${product.price.toLocaleString('nb-NO', { minimumFractionDigits: 2 })}`;
+        price.textContent = `$ ${product.price.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
         buyButton.textContent = "Add to Cart";
         backLink.textContent = "← Back to products";
-        backLink.href = "../Views/Home/index.html";
+        backLink.href = '../Views/Home/index.html';
     
         productDiv.appendChild(image)
         productDiv.appendChild(title)
@@ -58,12 +55,8 @@ async function fetchAPIProducts() {
         productDiv.appendChild(buyButton)
 
         container.appendChild(productDiv)
-        });
     } catch (error) {
         console.error("Error while fetching product:", error)
-        if (container.textContetnt.indexOf("Sorry") === -1) {
-        container.textContent = "Could not load product at this time.";
-        }
     }
 }
 
