@@ -12,9 +12,17 @@ async function fetchAPIProducts() {
             return;
         }
         const response = await fetch(`${API_URL}/${id}`)
+        if (!response.ok) {
+            if (response.status === 404) {
+                container.textContent = "Sorry, product not found.";
+                return;
+            }
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
         const data = await response.json()
         const product = data.data
 
+        product.array.forEach(element => {
         const productDiv = document.createElement("div")
         const image = document.createElement("img")
         const title = document.createElement("h2")
@@ -27,28 +35,35 @@ async function fetchAPIProducts() {
         title.className = 'product-title';
         description.className = 'product-description';
         price.className = 'product-price';
+        const buyButton = document.createElement("button");
         backLink.className = 'back-link';
-        backLink.href = "index.html";
+        anchor.href = "index.html";
         backLink.textContent = "← Back to products";
         
         image.src = product.image.url;
         image.alt = product.image.alt;
         title.textContent = product.title;
         description.textContent = product.description;
-        price.textContent = `NOK ${product.price.toLocaleString('nb-NO', { minimumFractionDigits: 2 })}`;
+        price.textContent = product.price;
+        // price.textContent = `NOK ${product.price.toLocaleString('nb-NO', { minimumFractionDigits: 2 })}`;
+        buyButton.textContent = "Add to Cart";
         backLink.textContent = "← Back to products";
-        backLink.href = "index.html";
+        backLink.href = "../Views/Home/index.html";
     
         productDiv.appendChild(image)
         productDiv.appendChild(title)
         productDiv.appendChild(description)
         productDiv.appendChild(price)
         productDiv.appendChild(backLink)
-        
+        productDiv.appendChild(buyButton)
+
         container.appendChild(productDiv)
+        });
     } catch (error) {
         console.error("Error while fetching product:", error)
+        if (container.textContetnt.indexOf("Sorry") === -1) {
         container.textContent = "Could not load product at this time.";
+        }
     }
 }
 

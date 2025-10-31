@@ -28,12 +28,13 @@ async function fetchAPIProducts() {
             content.className = 'box-content';
             title.className = 'box-title';
             price.className = 'box-price';
-            link.href = `/product.html?id=${product.id}`;
+            
 
             image.src = product.image.url;
             image.alt = product.image.alt;
             title.textContent = product.title;
-            price.textContent = `NOK ${product.price.toLocaleString('nb-NO', { minimumFractionDigits: 2 })}`;
+            price.textContent = `USD ${product.price.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+            link.href = `product.html?id=${product.id}`;
 
             content.appendChild(title);
             content.appendChild(price);
@@ -41,7 +42,7 @@ async function fetchAPIProducts() {
             box.appendChild(content);
             link.appendChild(box);
 
-            container.appendChild(box);});
+            container.appendChild(link);});
         //const products = data.data if (!response.ok)
         
     } catch (error) {
