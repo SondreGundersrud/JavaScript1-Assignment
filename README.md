@@ -18,17 +18,16 @@ User Stories
 - As a user, I want to view an order-confirmation screen after checking out.
 
 Required Pages
-The following pages are required to complete this assignment.
+The following pages are required to complete this assignment:
 
 - Home Page containing product list `/index.html`
 - Product Page showing all details of a specific product `/product/index.html`
 - Checkout Page showing all items in the basket `/checkout/index.html`
-- Confirmation Page showing a thank you message
-  `/checkout/confirmation/index.html`
+- Confirmation Page showing a thank you message `/checkout/confirmation/index.html`
 
 Optional Pages
 The following pages are not required to complete this assignment but help to
-improve the realism for those with extra time.
+improve the realism for those with extra time:
 
 - Category Pages (e.g. Male/Female Clothing, Movie Genres)
 - Terms and Conditions page (this may be AI generated)

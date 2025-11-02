@@ -49,7 +49,7 @@ async function fetchAPIProducts() {
         image: product?.image?.url ?? product?.images?.[0]?.url ?? ""
         });
     buyButton.textContent = "Added to cart!";
-    setTimeout(() => (buyButton.textContent = "Add to Cart"), 1000);
+    setTimeout(() => (buyButton.textContent = "Add to Cart"), 3000);
     });
 
     const backButton = document.createElement("button");
@@ -66,3 +66,7 @@ async function fetchAPIProducts() {
 }
 
 fetchAPIProducts()
+
+document.addEventListener("DOMContentLoaded", () => {
+    window.Cart?.updateCartCount?.();
+});
