@@ -35,7 +35,7 @@
     localStorage.setItem("lastOrder", JSON.stringify(order));
     saveCart([]);
     updateCartCount();
-    location.href = `../confirmation/index.html?id=${encodeURIComponent(orderId)}`;
+    location.href = `./Views/confirmation/index.html?id=${encodeURIComponent(orderId)}`;
   }
 
   function updateCartCount() {
