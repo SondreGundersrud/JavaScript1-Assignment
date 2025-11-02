@@ -12,51 +12,56 @@ async function fetchAPIProducts() {
             return;
         }
         const response = await fetch(`${API_URL}/${id}`)
-        // if (!response.ok) {
-        //     if (response.status === 404) {
-        //         container.textContent = "Sorry, product not found.";
-        //         return;}
-        //     throw new Error(`HTTP error! Status: ${response.status}`);
-        // }
         const data = await response.json()
         const product = data.data
 
-        const productDiv = document.createElement("div")
-        const image = document.createElement("img")
-        const title = document.createElement("h2")
-        const description = document.createElement("p")
-        const price = document.createElement("p")
-        const backLink = document.createElement("a")
+    const productDiv = document.createElement("div");
+    productDiv.className = "product-details";
 
-        productDiv.className = 'product-details';
-        image.className = 'product-image';
-        title.className = 'product-title';
-        description.className = 'product-description';
-        price.className = 'product-price';
-        const buyButton = document.createElement("button");
-        backLink.className = 'back-link';
-        backLink.textContent = "← Back to products";
-        
-        image.src = product.image.url;
-        image.alt = product.image.alt;
-        title.textContent = product.title;
-        description.textContent = product.description;
-        price.textContent = product.price;
-        price.textContent = `$ ${product.price.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
-        buyButton.textContent = "Add to Cart";
-        backLink.textContent = "← Back to products";
-        backLink.href = '../Views/Home/index.html';
-    
-        productDiv.appendChild(image)
-        productDiv.appendChild(title)
-        productDiv.appendChild(description)
-        productDiv.appendChild(price)
-        productDiv.appendChild(backLink)
-        productDiv.appendChild(buyButton)
+    const image = document.createElement("img");
+    image.className = "product-image";
+    image.src = product.image.url;
+    image.alt = product.image.alt;
 
-        container.appendChild(productDiv)
+    const infoDiv = document.createElement("div");
+    infoDiv.className = "product-info";
+
+    const title = document.createElement("h2");
+    title.className = "product-title";
+    title.textContent = product.title;
+
+    const description = document.createElement("p");
+    description.className = "product-description";
+    description.textContent = product.description;
+
+    const price = document.createElement("p");
+    price.className = "product-price";
+    price.textContent = `$ ${product.price.toLocaleString("en-US", { minimumFractionDigits: 2 })}`;
+
+    const buyButton = document.createElement("button");
+    buyButton.textContent = "Add to Cart";
+    buyButton.addEventListener("click", () => {
+        if (!window.Cart) return console.error("Cart not available");
+    window.Cart.addToCart({
+        id: product.id,
+        title: product.title,
+        price: Number(product.price),
+        image: product?.image?.url ?? product?.images?.[0]?.url ?? ""
+        });
+    buyButton.textContent = "Added to cart!";
+    setTimeout(() => (buyButton.textContent = "Add to Cart"), 1000);
+    });
+
+    const backButton = document.createElement("button");
+    backButton.className = "back-button";
+    backButton.textContent = "← Back to products";
+    backButton.addEventListener("click", () => history.back());
+
+    infoDiv.append(title, description, price, backButton, buyButton);
+    productDiv.append(image, infoDiv);
+    container.appendChild(productDiv);
     } catch (error) {
-        console.error("Error while fetching product:", error)
+    console.error("Error while fetching product:", error);
     }
 }
 
